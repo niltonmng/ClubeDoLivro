@@ -11,14 +11,9 @@ public class TestClubeLivro {
 
 	private ClubeDoLivro clube;
 	
-	@Before //@Test
+	@Before
 	public void setup(){
 		clube = new ClubeDoLivro();
-		//testePasso1();
-		//testePasso2();
-		//testePasso3e4();
-		//testePasso5();
-		//testExceptions();
 	}
 	
 	@Test
@@ -47,7 +42,7 @@ public class TestClubeLivro {
 	public void testePasso2(){
 		try {
 			clube.importaLivros("resources_p2.csv");
-			//testeGambiarra(); use esse metodo se nao souber resolver o artigo. 
+			//testeGambiarra();// use esse metodo se nao souber resolver o artigo. 
 			
 			Livro aCoroa = clube.buscaLivro("9788555340048");
 			Livro horaEstrela = clube.buscaLivro("9780586086926");

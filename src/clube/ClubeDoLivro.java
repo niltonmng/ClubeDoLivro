@@ -44,7 +44,7 @@ public class ClubeDoLivro {
 			}
 		}
 		br.close();
-		adicionaLivros();
+		this.adicionaLivros();
 	}
 
 	public Livro buscaLivro(String isbn) throws Exception {
