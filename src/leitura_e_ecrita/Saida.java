@@ -14,8 +14,12 @@ public class Saida {
 		OutputStreamWriter osw = new OutputStreamWriter(os);
 		BufferedWriter bw = new BufferedWriter(osw);
 
-		bw.write("A saida que queremos que seja escrita no arquivo");
-
+		String saida = "";
+		for (int i = 0; i < 30; i++) {
+			saida += "A saida que queremos que seja escrita no arquivo" + System.lineSeparator();			
+		}
+		bw.write(saida);
 		bw.close();
+
 	}
 }

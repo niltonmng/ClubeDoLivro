@@ -105,7 +105,7 @@ public class TestClubeLivro {
 			clube.listaOpinioes("9788508125975");
 			
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}

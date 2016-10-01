@@ -39,7 +39,7 @@ public class ClubeDoLivro {
 		String entrada = br.readLine();
 		this.aux.add(entrada);
 		while(entrada != null){
-			entrada = br.readLine();    // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
+			entrada = br.readLine();
 			if(entrada != null){
 				this.aux.add(entrada);
 			}
@@ -53,7 +53,7 @@ public class ClubeDoLivro {
 			String[] antesLivro = this.aux.get(i).split(",");
 			
 			String titulo = antesLivro[0].trim();
-			String autor = antesLivro[1].trim();        // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
+			String autor = antesLivro[1].trim();
 			int ano = Integer.parseInt(antesLivro[2].trim());
 			String isbn = antesLivro[3].trim();
 			
@@ -82,7 +82,7 @@ public class ClubeDoLivro {
 	}
 
 	public void listaOpinioes(String isbn) throws Exception {		
-		FileOutputStream os = new FileOutputStream("Opinioes.txt", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
+		FileOutputStream os = new FileOutputStream("Opinioes", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
 		OutputStreamWriter osw = new OutputStreamWriter(os);              // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
 		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
 		
