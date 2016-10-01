@@ -30,20 +30,34 @@ public class ClubeDoLivro {
 	}
 
 	public void importaLivros(String filename) throws Exception {
-		FileInputStream fis = new FileInputStream(filename);  // novo fluxo de entrada de dados no sistema (aqui entrarao os dados que foram salvos no aquivo).
+		FileInputStream fis = new FileInputStream(filename);  // novo fluxo de entrada de dados no sistema (aqui entrarao os dados que foram salvos no arquivo presente no root do projeto de nome "filename").
 		InputStreamReader isr = new InputStreamReader(fis);   // InputStreamReader é o decodificador dos elementos que estao no arquivo.
 		BufferedReader br = new BufferedReader(isr);  		  // BufferedReader concatena os diversos chars do arquivo, decodificados pelo InputStreamReader, para formar uma String através do método readLine
 		
 		String s = br.readLine();
 		this.aux.add(s);
 		while(s != null){
-			s = br.readLine();                  // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
+			s = br.readLine();    // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
 			if(s != null){
 				this.aux.add(s);
 			}
 		}
 		br.close();
 		this.resgataLivros();
+	}
+	
+	private void resgataLivros(){
+		for (int i = 0; i < this.aux.size(); i++) {
+			String[] antesLivro = this.aux.get(i).split(",");
+			
+			String titulo = antesLivro[0].trim();
+			String autor = antesLivro[1].trim();        // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
+			int ano = Integer.parseInt(antesLivro[2].trim());
+			String isbn = antesLivro[3].trim();
+			
+			Livro livro = new Livro(titulo, autor, ano, isbn);
+			this.livros.add(livro);
+		}
 	}
 
 	public Livro buscaLivro(String isbn) throws Exception {
@@ -80,20 +94,4 @@ public class ClubeDoLivro {
 
 	public void ranking(int n) throws Exception {
 	}
-	
-	
-	private void resgataLivros(){
-		for (int i = 0; i < this.aux.size(); i++) {
-			String[] antesLivro = this.aux.get(i).split(",");
-			
-			String titulo = antesLivro[0].trim();
-			String autor = antesLivro[1].trim();
-			int ano = Integer.parseInt(antesLivro[2].trim());
-			String isbn = antesLivro[3].trim();
-			
-			Livro livro = new Livro(titulo, autor, ano, isbn);
-			this.livros.add(livro);
-		}
-	}
-
 }

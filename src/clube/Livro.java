@@ -64,19 +64,13 @@ public class Livro {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Livro other = (Livro) obj;
-		if (isbn == null) {
-			if (other.isbn != null)
-				return false;
-		} else if (!isbn.equals(other.isbn))
-			return false;
-		return true;
+		if(obj instanceof Livro){
+			Livro novoLivro = (Livro)obj;
+			if(this.getISBN().equalsIgnoreCase(novoLivro.getISBN())){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String toString(){
