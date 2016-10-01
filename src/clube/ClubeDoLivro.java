@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class ClubeDoLivro {
 
+	private static final String FIM_DE_LINHA = System.lineSeparator();
+	
 	private Set<Livro> livros;
 	private List<String> aux;
 
@@ -34,12 +36,12 @@ public class ClubeDoLivro {
 		InputStreamReader isr = new InputStreamReader(fis);   // InputStreamReader é o decodificador dos elementos que estao no arquivo.
 		BufferedReader br = new BufferedReader(isr);  		  // BufferedReader concatena os diversos chars do arquivo, decodificados pelo InputStreamReader, para formar uma String através do método readLine
 		
-		String s = br.readLine();
-		this.aux.add(s);
-		while(s != null){
-			s = br.readLine();    // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
-			if(s != null){
-				this.aux.add(s);
+		String entrada = br.readLine();
+		this.aux.add(entrada);
+		while(entrada != null){
+			entrada = br.readLine();    // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
+			if(entrada != null){
+				this.aux.add(entrada);
 			}
 		}
 		br.close();
@@ -79,17 +81,20 @@ public class ClubeDoLivro {
 		return 0.0;
 	}
 
-	public void listaOpinioes(String isbn) throws Exception {
+	public String listaOpinioes(String isbn) throws Exception {		
 		FileOutputStream os = new FileOutputStream("Opinioes.txt", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
 		OutputStreamWriter osw = new OutputStreamWriter(os);              // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
 		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
 		
 		Livro livro = buscaLivro(isbn);
+		String saida = livro.toString() + FIM_DE_LINHA + "Opinioes:" + FIM_DE_LINHA;
 		for (int i = 0; i < livro.getOpinioes().size(); i++) {
-			String opiniao = livro.getOpinioes().get(i).toString(); // escrevemos cada opiniao da lista no arquivo
-			bw.write(opiniao);			
+			String opiniao = livro.getOpinioes().get(i).toString();
+			saida += opiniao + FIM_DE_LINHA;
 		}
+		bw.write(saida); // aqui escrevemos todas as opinioes em um arquivo de saida/ salvamos essas opinioes a respeito de um livro.
 		bw.close();
+		return saida;
 	}
 
 	public void ranking(int n) throws Exception {

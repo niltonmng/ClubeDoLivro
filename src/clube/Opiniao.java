@@ -12,8 +12,8 @@ public class Opiniao {
 			throw new Exception("Nota fora do intervalo de 1 a 5.");
 		}
 		this.nota = nota;
-		this.comentarioTexto = comentario;
-		this.autor = autor;
+		this.comentarioTexto = comentario.trim();
+		this.autor = autor.trim();
 	}
 
 	public int getNota() {
@@ -44,9 +44,9 @@ public class Opiniao {
 	public String toString(){
 		String recomendacao = "";
 		if(nota > 3){
-			recomendacao += " recomendou este livro";
+			recomendacao += " recomendou esse livro";
 		}else{
-			recomendacao += " nao recomendou este livro";
+			recomendacao += " nao recomendou esse livro";
 		}
 		return this.getAutor() + recomendacao + FIM_DE_LINHA + "Nota: " + this.getNota() + FIM_DE_LINHA + this.getComentarioTexto();
 	}
