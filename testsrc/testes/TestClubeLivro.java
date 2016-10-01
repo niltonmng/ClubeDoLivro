@@ -180,7 +180,7 @@ public class TestClubeLivro {
 			clube.adicionaLivro("Orlando","Virginia Woolf",1928,"9780143566458");
 			clube.adicionaLivro("Razao e sensibilidade","Jane Austen",1811,"9788499080291");
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}

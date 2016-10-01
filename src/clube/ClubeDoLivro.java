@@ -22,12 +22,16 @@ public class ClubeDoLivro {
 		this.aux = new ArrayList<String>();
 		this.livros = new HashSet<Livro>();
 	}
+	
+	public Set<Livro> getLivros(){
+		return this.livros;
+	}
 
 	public void adicionaLivro(String titulo, String autor, int ano, String isbn) throws Exception {
-		if (this.livros.contains(buscaLivro(isbn))) {
+		Livro livro = new Livro(titulo, autor, ano, isbn);
+		if (this.getLivros().contains(livro)) {
 			throw new Exception("Livro ja pertence ao acervo.");
 		}
-		Livro livro = new Livro(titulo, autor, ano, isbn);
 		this.livros.add(livro);
 	}
 
