@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -15,10 +14,10 @@ import java.util.Set;
 public class ClubeDoLivro {
 
 	private Set<Livro> livros;
-	private List<String> meus;
+	private List<String> aux;
 
 	public ClubeDoLivro() {
-		this.meus = new ArrayList<String>();
+		this.aux = new ArrayList<String>();
 		this.livros = new HashSet<Livro>();
 	}
 
@@ -36,15 +35,15 @@ public class ClubeDoLivro {
 		BufferedReader br = new BufferedReader(isr);  		  // BufferedReader concatena os diversos chars do arquivo, decodificados pelo InputStreamReader, para formar uma String através do método readLine
 		
 		String s = br.readLine();
-		this.meus.add(s);
+		this.aux.add(s);
 		while(s != null){
-			s = br.readLine();
+			s = br.readLine();                  // PASSOU NOS TESTES     FEITO DA FORMA CORRETA
 			if(s != null){
-				this.meus.add(s);
+				this.aux.add(s);
 			}
 		}
 		br.close();
-		this.adicionaLivros();
+		this.resgataLivros();
 	}
 
 	public Livro buscaLivro(String isbn) throws Exception {
@@ -83,10 +82,16 @@ public class ClubeDoLivro {
 	}
 	
 	
-	private void adicionaLivros(){
-		for (int i = 0; i < this.meus.size(); i++) {
-			String[] antesLivro = this.meus.get(i).split(",");
-			Livro livro = new Livro(antesLivro[0], antesLivro[1], Integer.parseInt(antesLivro[2]), antesLivro[3]);
+	private void resgataLivros(){
+		for (int i = 0; i < this.aux.size(); i++) {
+			String[] antesLivro = this.aux.get(i).split(",");
+			
+			String titulo = antesLivro[0].trim();
+			String autor = antesLivro[1].trim();
+			int ano = Integer.parseInt(antesLivro[2].trim());
+			String isbn = antesLivro[3].trim();
+			
+			Livro livro = new Livro(titulo, autor, ano, isbn);
 			this.livros.add(livro);
 		}
 	}
