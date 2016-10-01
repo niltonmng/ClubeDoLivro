@@ -81,7 +81,7 @@ public class ClubeDoLivro {
 		return 0.0;
 	}
 
-	public String listaOpinioes(String isbn) throws Exception {		
+	public void listaOpinioes(String isbn) throws Exception {		
 		FileOutputStream os = new FileOutputStream("Opinioes.txt", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
 		OutputStreamWriter osw = new OutputStreamWriter(os);              // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
 		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
@@ -94,7 +94,6 @@ public class ClubeDoLivro {
 		}
 		bw.write(saida); // aqui escrevemos todas as opinioes em um arquivo de saida/ salvamos essas opinioes a respeito de um livro.
 		bw.close();
-		return saida;
 	}
 
 	public void ranking(int n) throws Exception {
