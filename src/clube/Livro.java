@@ -3,7 +3,7 @@ package clube;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Livro {
+public class Livro implements Comparable<Livro> {
 
 	private static final String FIM_DE_LINHA = System.lineSeparator();
 	
@@ -75,5 +75,15 @@ public class Livro {
 	
 	public String toString(){
 		return 	this.getTitulo() + " (ISBN " + this.getISBN() + "), " + this.getAnoLancamento() + ".  " + FIM_DE_LINHA + this.getAutor();
+	}
+
+	@Override
+	public int compareTo(Livro livro) {
+		if(this.getOpinioes().size() > livro.getOpinioes().size()){
+			return 1;
+		}else if(this.getOpinioes().size() < livro.getOpinioes().size()){
+			return -1;
+		}
+		return 0;
 	}
 }

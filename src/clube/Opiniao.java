@@ -12,8 +12,8 @@ public class Opiniao {
 			throw new Exception("Nota fora do intervalo de 1 a 5.");
 		}
 		this.nota = nota;
-		this.comentarioTexto = comentario.trim();
-		this.autor = autor.trim();
+		this.comentarioTexto = comentario;
+		this.autor = autor;
 	}
 
 	public int getNota() {

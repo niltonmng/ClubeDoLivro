@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,10 +18,12 @@ public class ClubeDoLivro {
 	
 	private Set<Livro> livros;
 	private List<String> aux;
+	private List<Livro> aux2;
 
 	public ClubeDoLivro() {
 		this.aux = new ArrayList<String>();
 		this.livros = new HashSet<Livro>();
+		this.aux2 = new ArrayList<Livro>();
 	}
 	
 	public Set<Livro> getLivros(){
@@ -28,11 +31,20 @@ public class ClubeDoLivro {
 	}
 
 	public void adicionaLivro(String titulo, String autor, int ano, String isbn) throws Exception {
-		Livro livro = new Livro(titulo, autor, ano, isbn);
-		if (this.getLivros().contains(livro)) {
+		if (this.pesquisaLivro(isbn) == true) {
 			throw new Exception("Livro ja pertence ao acervo.");
 		}
+		Livro livro = new Livro(titulo, autor, ano, isbn);
 		this.livros.add(livro);
+	}
+	
+	private boolean pesquisaLivro(String isbn) throws Exception{
+		for (Livro livro : this.getLivros()) {
+			if(livro.getISBN().equals(isbn)){
+				return true;
+			}
+		}
+		throw new Exception("O livro nao esta no nosso acervo.");
 	}
 
 	public void importaLivros(String filename) throws Exception {
@@ -49,10 +61,7 @@ public class ClubeDoLivro {
 			}
 		}
 		br.close();
-		this.resgataLivros();
-	}
-	
-	private void resgataLivros(){
+		
 		for (int i = 0; i < this.aux.size(); i++) {
 			String[] antesLivro = this.aux.get(i).split(",");
 			
@@ -63,7 +72,12 @@ public class ClubeDoLivro {
 			
 			Livro livro = new Livro(titulo, autor, ano, isbn);
 			this.livros.add(livro);
+			this.aux2.add(livro);
 		}
+		
+		//for (Livro livro : this.livros) {
+		//	System.out.println(livro);
+		//}
 	}
 
 	public Livro buscaLivro(String isbn) throws Exception {
@@ -82,11 +96,17 @@ public class ClubeDoLivro {
 	}
 
 	public double getNotaGeral(String isbn) throws Exception {
-		return 0.0;
+		Livro livro = buscaLivro(isbn);
+		double media = 0.0;
+		for (int i = 0; i < livro.getOpinioes().size(); i++) {
+			media += livro.getOpinioes().get(i).getNota();
+		}
+		media /= livro.getOpinioes().size();
+		return media;
 	}
 
 	public void listaOpinioes(String isbn) throws Exception {		
-		FileOutputStream os = new FileOutputStream("Opinioes", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
+		FileOutputStream os = new FileOutputStream("Opinioes.txt", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
 		OutputStreamWriter osw = new OutputStreamWriter(os);              // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
 		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
 		
@@ -101,5 +121,12 @@ public class ClubeDoLivro {
 	}
 
 	public void ranking(int n) throws Exception {
+		if(n > this.aux2.size()){
+			throw new Exception("Nao ha livros suficientes no acervo.");			
+		}
+		Collections.sort(aux2);
+		for (int i = 0; i < n; i++) {
+			System.out.println(aux2.get(i).toString());
+		}
 	}
 }
