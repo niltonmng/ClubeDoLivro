@@ -74,10 +74,6 @@ public class ClubeDoLivro {
 			this.livros.add(livro);
 			this.aux2.add(livro);
 		}
-		
-		//for (Livro livro : this.livros) {
-		//	System.out.println(livro);
-		//}
 	}
 
 	public Livro buscaLivro(String isbn) throws Exception {
@@ -106,17 +102,17 @@ public class ClubeDoLivro {
 	}
 
 	public void listaOpinioes(String isbn) throws Exception {		
-		FileOutputStream os = new FileOutputStream("Opinioes.txt", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
-		OutputStreamWriter osw = new OutputStreamWriter(os);              // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
-		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
+		FileOutputStream os = new FileOutputStream("Opinioes", true); // novo fluxo de saida de dados no sistema (aqui sairao vao ser salvos/escritos no aquivo).
+		OutputStreamWriter osw = new OutputStreamWriter(os); // OutputStreamReader é o decodificador dos elementos que irao ser salvos/escritos no arquivo.
+		BufferedWriter bw = new BufferedWriter(osw); // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
 		
 		Livro livro = buscaLivro(isbn);
-		String saida = livro.toString() + FIM_DE_LINHA + "Opinioes:" + FIM_DE_LINHA + FIM_DE_LINHA;
+		String saida = livro.toString() + FIM_DE_LINHA + FIM_DE_LINHA + "Opinioes:" + FIM_DE_LINHA;
 		for (int i = 0; i < livro.getOpinioes().size(); i++) {
 			String opiniao = livro.getOpinioes().get(i).toString();
-			saida += opiniao + FIM_DE_LINHA + FIM_DE_LINHA;
+			saida += opiniao + FIM_DE_LINHA;
 		}
-		bw.write(saida); // aqui escrevemos todas as opinioes em um arquivo de saida/ salvamos essas opinioes a respeito de um livro.
+		bw.write(saida); // aqui escrevemos/salvamos todas as opinioes em um arquivo de saida essas opinioes a respeito de um livro.
 		bw.close();
 	}
 
@@ -125,8 +121,5 @@ public class ClubeDoLivro {
 			throw new Exception("Nao ha livros suficientes no acervo.");			
 		}
 		Collections.sort(aux2);
-		//for (int i = 0; i < n; i++) {
-		//	System.out.println(aux2.get(i).toString());
-		//}
 	}
 }
