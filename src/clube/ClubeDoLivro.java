@@ -111,10 +111,10 @@ public class ClubeDoLivro {
 		BufferedWriter bw = new BufferedWriter(osw);                // BufferedWriter concatena os diversos chars do arquivo, decodificados pelo OutputStreamReader, para formar uma String através do método write();
 		
 		Livro livro = buscaLivro(isbn);
-		String saida = livro.toString() + FIM_DE_LINHA + "Opinioes:" + FIM_DE_LINHA;
+		String saida = livro.toString() + FIM_DE_LINHA + "Opinioes:" + FIM_DE_LINHA + FIM_DE_LINHA;
 		for (int i = 0; i < livro.getOpinioes().size(); i++) {
 			String opiniao = livro.getOpinioes().get(i).toString();
-			saida += opiniao + FIM_DE_LINHA;
+			saida += opiniao + FIM_DE_LINHA + FIM_DE_LINHA;
 		}
 		bw.write(saida); // aqui escrevemos todas as opinioes em um arquivo de saida/ salvamos essas opinioes a respeito de um livro.
 		bw.close();
@@ -125,8 +125,8 @@ public class ClubeDoLivro {
 			throw new Exception("Nao ha livros suficientes no acervo.");			
 		}
 		Collections.sort(aux2);
-		for (int i = 0; i < n; i++) {
-			System.out.println(aux2.get(i).toString());
-		}
+		//for (int i = 0; i < n; i++) {
+		//	System.out.println(aux2.get(i).toString());
+		//}
 	}
 }

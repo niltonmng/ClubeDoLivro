@@ -8,7 +8,7 @@ public class Opiniao {
 	private String autor;
 	
 	public Opiniao(int nota, String comentario, String autor) throws Exception{
-		if(nota < 1 && nota > 5){
+		if(nota < 1 || nota > 5){
 			throw new Exception("Nota fora do intervalo de 1 a 5.");
 		}
 		this.nota = nota;
